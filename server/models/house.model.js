@@ -7,10 +7,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Property name is required']
     },
-    profilePhoto: {
+    /* profilePhoto: {
         type: String,
         required: [true, 'Profile photo is required']
-    },
+    }, */
     housePhoto: {
         type: String,
         required: [true, 'House photo is required']

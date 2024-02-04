@@ -6,7 +6,7 @@ const multer = require('multer');
 // Set up Multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, '/uploads/');
+        cb(null, './uploads/');
     },
     filename: function(req, file, cb) {
         cb(null, new Date().toISOString() + file.originalname); 
@@ -30,7 +30,7 @@ const fileFilter = (req, file, cb) => {
       fileSize: 1024 * 1024 * 5 // Limit file size to 5MB
     },
     fileFilter: fileFilter
-  });
+}).fields([{ name: 'name', maxCount: 1 }, { name: 'housePhoto', maxCount: 1 }, { name: 'description', maxCount: 1 }]);
 
   const getImages = async (req, res, next) => {
     try {
@@ -48,8 +48,10 @@ const fileFilter = (req, file, cb) => {
 
 const create = async (req, res, next) => {
     // Use Multer middleware
-    upload.array('photos', 2)(req, res, async function(err) {
-      if (err) {
+    upload(req, res, async function(err) {
+      if (err instanceof multer.MulterError) {
+        return res.status(StatusCodes.BAD_REQUEST).json({message: err.message});
+      } else if (err) {
         return res.status(StatusCodes.BAD_REQUEST).json({message: err.message});
       }
   
@@ -62,8 +64,8 @@ const create = async (req, res, next) => {
         // Create a new property with the uploaded files
         var recordedProperty = await houseModel.create({
           ...req.body,
-          profilePhoto: req.files[0].path,
-          housePhoto: req.files[1].path
+          profilePhoto: req.files.profilePhoto[0].path,
+          housePhoto: req.files.housePhoto[0].path
         });
   
         res.status(StatusCodes.CREATED).json({
