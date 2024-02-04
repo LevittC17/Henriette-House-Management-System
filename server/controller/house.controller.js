@@ -6,14 +6,45 @@ const multer = require('multer');
 // Set up Multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, './uploads/');
+        cb(null, '/uploads/');
     },
     filename: function(req, file, cb) {
         cb(null, new Date().toISOString() + file.originalname); 
     }
 });
 
-const upload = multer({ storage: storage });
+// Filter files (optional)
+const fileFilter = (req, file, cb) => {
+    // Reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+  
+  // Initialize Multer
+  const upload = multer({
+    storage: storage,
+    limits: {
+      fileSize: 1024 * 1024 * 5 // Limit file size to 5MB
+    },
+    fileFilter: fileFilter
+  });
+
+  const getImages = async (req, res, next) => {
+    try {
+        var properties = await houseModel.find({});
+        var images = properties.map(property => ({
+            housePhoto: req.protocol + '://' + req.get('host') + '/' + property.housePhoto
+        }));
+        res.status(StatusCodes.OK).json({
+            images
+        });
+    } catch (error) {
+        res.status(StatusCodes.BAD_REQUEST).json({message: error.message});
+    }
+};
 
 const create = async (req, res, next) => {
     // Use Multer middleware
@@ -104,6 +135,7 @@ const remove = async (req, res, next) => {
 }
 
 module.exports ={
+    getImages,
     create,
     list,
     update,
