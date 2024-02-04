@@ -1,0 +1,130 @@
+.section_padding{
+    padding: 4rem 4rem;
+  }
+  .footer{
+    background-image: url('../assets/bgi.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: inherit;
+    color: white;
+  }
+    .sb_footer-section_padding{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .add-new-propert{
+    display: inline-flex;
+    gap: 1rem;
+  }
+  
+  .sb_footer-links{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+    padding: 40px;
+  }
+  
+  .sb_footer-links_div{
+    width: 150px;
+    margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: #98A2B3;
+  }
+  a{
+    color: #EAECF0;
+    text-decoration: none;
+  }
+  .sb_footer-links_div h4{
+  font-size: 14px;
+  line-height: 17px;
+  margin-bottom: 0.9rem;
+  }
+  .sb_footer-links_div p{
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    }
+    .sb_footer-links_div button{
+      margin-bottom: 1rem;
+    }
+  
+  .sb_footer-bellow-links{
+    width: 10rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sb_footer-copyright{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color:aliceblue;
+  
+  }
+  .sb_footer-copyright p{
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  .sb_footer-bellow-links a{
+    color: black;
+    gap: 2rem;
+  }
+  .sb_footer-bellow-links p{
+  font-size: 13px;
+  line-height: 15px;
+  margin-left: 2rem;
+  color: white;
+  font-weight: 600;
+  }
+  
+  /* responsivness */
+  
+  @media screen and (max-width:850px) {
+    .sb_footer-links_div h4{
+      font-size: 44px;
+      line-height: 50px;
+    }
+  }
+  @media screen and (max-width:550px) {
+    .sb_footer-links_div h4{
+      font-size: 28px;
+      line-height: 38px;
+    }
+      .sb_footer-links_div{
+        margin: 1rem o;
+      }
+    }
+  
+      @media screen and (max-width:450px) {
+        .sb_footer-links_div p{
+          font-size: 0.6rem;
+          line-height: 0.4rem;
+        }
+          .sb_footer-links_div button{
+            margin-right: 1.5rem;                }
+  
+    .sb_footer-bellow-links{
+      flex-direction: column;
+    }
+    .sb_footer-bellow-links a{
+      flex-direction: column;
+    }
+    @media screen and (max-width:400px) {
+      .sb_footer-links_div h4 {
+        font-size: 23px;
+        line-height: 33px;
+      }
+    }
+  }
